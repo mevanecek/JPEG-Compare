@@ -41,10 +41,12 @@ int main(int argc, const char * argv[]) {
     const char * jpgFile = "/Users/mattvanecek/Documents/XCode Projects/CPP Code Clinic/Ex_Files_CC_CPP_02/Exercise Files/Chap02/Images-small/78771293a.jpg";
     FILE* source;
     int row_stride;
+    int jpg_size;
 
     struct jpeg_decompress_struct cinfo;
     struct my_error_mgr jerr;
     JSAMPARRAY buffer;
+    JSAMPIMAGE image;
 
     if ((source = fopen(jpgFile, "rb")) == NULL) {
         fprintf(stderr, "can't open %s\n", jpgFile);
@@ -69,20 +71,26 @@ int main(int argc, const char * argv[]) {
     jpeg_create_decompress(&cinfo);
     jpeg_stdio_src(&cinfo, source);
     (void) jpeg_read_header(&cinfo, TRUE);
-
-    printf("output_width   = %i\n", cinfo.image_width);
-    printf("output_height  = %i\n", cinfo.image_height);
-    printf("num components = %i\n", cinfo.num_components);
-    printf("color space    = %i\n", cinfo.jpeg_color_space);
-
-    (void) jpeg_start_decompress(&cinfo);
+    jpeg_calc_output_dimensions(&cinfo);
 
     /* JSAMPLEs per row in output buffer */
     row_stride = cinfo.output_width * cinfo.output_components;
-    printf("row stride    = %i\n", row_stride);
+    jpg_size = cinfo.output_width * cinfo.output_components * cinfo.output_height;
+
+    printf("image_width    = %i\n", cinfo.image_width);
+    printf("image _height  = %i\n", cinfo.image_height);
+    printf("output_width   = %i\n", cinfo.output_width);
+    printf("output_height  = %i\n", cinfo.output_height);
+    printf("num components = %i\n", cinfo.num_components);
+    printf("color space    = %i\n", cinfo.jpeg_color_space);
+    printf("row stride     = %i\n", row_stride);
+    printf("image size     = %i\n", jpg_size);
+
+    (void) jpeg_start_decompress(&cinfo);
 
     /* Make a one-row-high sample array that will go away when done with image */
     buffer = (*cinfo.mem->alloc_sarray)((j_common_ptr) &cinfo, JPOOL_IMAGE, row_stride, 1);
+    image = (JSAMPIMAGE)(*cinfo.mem->alloc_large)((j_common_ptr) &cinfo, JPOOL_IMAGE, jpg_size);
 
     while (cinfo.output_scanline < cinfo.output_height) {
         (void) jpeg_read_scanlines(&cinfo, buffer, 1);
@@ -91,8 +99,8 @@ int main(int argc, const char * argv[]) {
         //put_scanline_someplace(buffer[0], row_stride);
     }
     
+    jpeg_destroy((j_common_ptr) &cinfo);
 
-    jpeg_destroy_decompress(&cinfo);
     fclose(source);
     return 0;
 }

@@ -9,7 +9,16 @@
 #include <iostream>
 #include <stdio.h>
 #include <setjmp.h>
-#include <jpeglib.h>
+#include "jpeglib.h"
+
+FILE _iob[] = { *stdin, *stdout, *stderr };
+
+#ifdef _WIN64
+extern "C" FILE * __cdecl __iob_func(void)
+{
+	return _iob;
+}
+#endif
 
 struct my_error_mgr {
     struct jpeg_error_mgr pub;    /* "public" fields */
@@ -38,7 +47,12 @@ my_error_exit (j_common_ptr cinfo) {
 
 int main(int argc, const char * argv[]) {
 
+#ifdef _WIN64
+	const char * jpgFile = "C:\\Personal\\03196514\\Documents\\GitHub\\JPEG-Compare\\20160530_guitar_0018.jpg";
+#else
     const char * jpgFile = "/Users/mattvanecek/Documents/XCode Projects/CPP Code Clinic/Ex_Files_CC_CPP_02/Exercise Files/Chap02/Images-small/78771293a.jpg";
+#endif
+
     FILE* source;
     int row_stride;
     int jpg_size;

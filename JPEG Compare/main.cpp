@@ -49,8 +49,10 @@ int main(int argc, const char * argv[]) {
 
 #ifdef _WIN64
 	const char * jpgFile = "C:\\Personal\\03196514\\Documents\\GitHub\\JPEG-Compare\\20160530_guitar_0018.jpg";
+    const char * jpgOutFile = "C:\\Personal\\03196514\\Documents\\GitHub\\JPEG-Compare\\20160530_guitar_0018-new.jpg";
 #else
-    const char * jpgFile = "/Users/mattvanecek/Documents/XCode Projects/CPP Code Clinic/Ex_Files_CC_CPP_02/Exercise Files/Chap02/Images-small/78771293a.jpg";
+    const char * jpgFile = "/Users/mattvanecek/Documents/XCode Projects/CPP Code Clinic/JPEG Compare/20160530_guitar_0018.jpg";
+    const char * jpgOutFile = "/Users/mattvanecek/Documents/XCode Projects/CPP Code Clinic/JPEG Compare/20160530_guitar_0018-new.jpg";
 #endif
 
     FILE* source;
@@ -59,7 +61,6 @@ int main(int argc, const char * argv[]) {
 
     struct jpeg_decompress_struct cinfo;
     struct my_error_mgr jerr;
-    JSAMPARRAY buffer;
     JSAMPIMAGE image;
 
     if ((source = fopen(jpgFile, "rb")) == NULL) {
@@ -103,18 +104,25 @@ int main(int argc, const char * argv[]) {
     (void) jpeg_start_decompress(&cinfo);
 
     /* Make a one-row-high sample array that will go away when done with image */
-    buffer = (*cinfo.mem->alloc_sarray)((j_common_ptr) &cinfo, JPOOL_IMAGE, row_stride, 1);
-    image = (JSAMPIMAGE)(*cinfo.mem->alloc_large)((j_common_ptr) &cinfo, JPOOL_IMAGE, jpg_size);
+    // buffer = (*cinfo.mem->alloc_sarray)((j_common_ptr) &cinfo, JPOOL_IMAGE, row_stride, 1);
+    // image = (JSAMPIMAGE)(*cinfo.mem->alloc_large)((j_common_ptr) &cinfo, JPOOL_IMAGE, jpg_size);
+    // buffer = (*cinfo.mem->alloc_sarray)((j_common_ptr) &cinfo, JPOOL_IMAGE, row_stride, 1);
+
+    image = (JSAMPIMAGE)calloc(cinfo.output_height, sizeof(unsigned char));
+    printf("Image pointer = %p\n", image);
+
+    for (int i = 0; i < cinfo.output_height; i++) {
+        image[i] = (*cinfo.mem->alloc_sarray)((j_common_ptr) &cinfo, JPOOL_IMAGE, row_stride, 1);
+        printf("image[%d] = %p\n", i, image[i]);
+    }
 
     while (cinfo.output_scanline < cinfo.output_height) {
-        (void) jpeg_read_scanlines(&cinfo, buffer, 1);
-
-        /* Assume put_scanline_someplace wants a pointer and sample count. */
-        //put_scanline_someplace(buffer[0], row_stride);
+        fprintf(stderr, "Reading image[%i] at %p\n", cinfo.output_scanline, image[cinfo.output_scanline]);
+        (void) jpeg_read_scanlines(&cinfo, image[cinfo.output_scanline], 1);
     }
     
-    jpeg_destroy((j_common_ptr) &cinfo);
-
+    jpeg_destroy_decompress(&cinfo);
+    free(image);
     fclose(source);
     return 0;
 }

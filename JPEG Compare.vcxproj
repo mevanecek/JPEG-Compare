@@ -107,6 +107,7 @@
       <AdditionalDependencies>legacy_stdio_definitions.lib;jpeg-static.lib;turbojpeg-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>
       </IgnoreAllDefaultLibraries>
+      <SubSystem>Console</SubSystem>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>

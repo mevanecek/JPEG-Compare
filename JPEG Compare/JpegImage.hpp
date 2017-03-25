@@ -15,14 +15,28 @@
 #include <setjmp.h>
 
 
+struct JpegImageErrorMgr {
+    struct jpeg_error_mgr pub;    /* "public" fields */
+    jmp_buf setjmp_buffer;        /* for return to caller */
+};
+
+typedef struct JpegImageErrorMgr *JpegImageErrorMgrPtr;
+
 class JpegImage {
     const std::string jpegFile;
 
     struct jpeg_decompress_struct dcinfo;
 	struct jpeg_compress_struct cinfo;
-	unsigned char * image;
-    int row_stride;
+    struct JpegImageErrorMgr jpegError;
 
+    unsigned char * image;
+    JDIMENSION height;
+    JDIMENSION width;
+    int numComponents;
+    
+    int row_stride;
+    size_t jpg_size;
+    
 	bool loaded; /* Has the file already been loaded */
 
     FILE * handle;
@@ -30,11 +44,15 @@ class JpegImage {
     // Private empty constuctor
 	JpegImage() {};
 
+    void initialize();
+    void initializeJpegError();
+    void initializeDecompress();
+    void initializeCompress();
 	void freeBuffers();
 
 public:
-    JpegImage(const char * file) : jpegFile(file), image(nullptr) {};
-    JpegImage(std::string & file) : jpegFile(file), image(nullptr) {};
+    JpegImage(const char * file);
+    JpegImage(std::string & file);
     ~JpegImage();
 
     /**
@@ -44,8 +62,14 @@ public:
 	void writeJpegFile();
 	void writeJpegFile(std::string outFile);
     
-	void setImage(const unsigned char * image, const size_t row_stride, const size_t height);
+    void setImage(const unsigned char * imgData, const JDIMENSION imgHt,
+                  const JDIMENSION imgWdt, const int imgNumComp);
 	const unsigned char * getImage();
+
+    const JDIMENSION getHeight();
+    const JDIMENSION getWidth();
+    const int getNumComponents();
+
 };
 
 #endif /* JpegImage_hpp */

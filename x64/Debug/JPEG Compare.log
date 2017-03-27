@@ -1,3 +1,7 @@
-﻿  JpegImage.cpp
-  JPEG Compare.vcxproj -> C:\Personal\03196514\Documents\GitHub\JPEG-Compare\x64\Debug\JPEG Compare.exe
-  JPEG Compare.vcxproj -> C:\Personal\03196514\Documents\GitHub\JPEG-Compare\x64\Debug\JPEG Compare.pdb (Partial PDB)
+﻿  main.cpp
+  JpegImage.cpp
+  JpegException.cpp
+  Generating Code...
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  JPEG Compare.vcxproj -> D:\Users\Matt\Documents\GitHub\JPEG-Compare\x64\Debug\JPEG Compare.exe
+  JPEG Compare.vcxproj -> D:\Users\Matt\Documents\GitHub\JPEG-Compare\x64\Debug\JPEG Compare.pdb (Partial PDB)

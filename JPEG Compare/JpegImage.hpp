@@ -32,8 +32,9 @@ class JpegImage {
     unsigned char * image;
     JDIMENSION height;
     JDIMENSION width;
+    J_COLOR_SPACE jpegColorSpace;
+
     int numComponents;
-    
     int row_stride;
     size_t jpg_size;
     

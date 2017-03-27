@@ -8,9 +8,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
+
 #include <string>
 
 #include "JpegImage.hpp"
+#include "JpegException.hpp"
 
 METHODDEF(void) error_exit (j_common_ptr dcinfo) {
     /* dcinfo->err really points to a my_error_mgr struct, so coerce pointer */
@@ -79,21 +82,22 @@ void JpegImage::loadJpegFile() {
 
 	jpg_size = 0;
 	unsigned char * ptr = nullptr;
+    errno = 0;
 
     if ((handle = fopen(jpegFile.c_str(), "rb")) == NULL) {
-        fprintf(stderr, "can't open %s\n", jpegFile.c_str());
+        std::string errMsg(strerror(errno));
+        errMsg = "Error opening " + jpegFile + ": " + errMsg;
+        throw JpegException(errMsg.c_str());
     }
     
-    /* Establish the setjmp return context for my_error_exit to use. */
+    /* Establish the setjmp return context for error manager to use. */
     if (setjmp(jpegError.setjmp_buffer)) {
-        /* If we get here, the JPEG code has signaled an error.
-         * We need to clean up the JPEG object, close the input file, and return.
-         */
+        std::string errMsg(strerror(errno));
+        errMsg = "A JPEG error occured for " + jpegFile + ": " + errMsg;
         jpeg_destroy_decompress(&dcinfo);
         fclose(handle);
 
-        // TODO: Add Exception handling here, instead of return
-        return;
+        throw JpegException(errMsg.c_str());
     }
 
 	/* Now we can initialize the JPEG decompression object. */
@@ -101,12 +105,15 @@ void JpegImage::loadJpegFile() {
 	jpeg_stdio_src(&dcinfo, handle);
 	(void)jpeg_read_header(&dcinfo, TRUE);
 	jpeg_calc_output_dimensions(&dcinfo);
+    (void)jpeg_start_decompress(&dcinfo);
 
 	/* JSAMPLEs per row in output buffer */
 	row_stride = dcinfo.output_width * dcinfo.output_components;
 	jpg_size = row_stride * dcinfo.output_height;
-
-	(void)jpeg_start_decompress(&dcinfo);
+    height = dcinfo.output_height;
+    width = dcinfo.output_width;
+    numComponents = dcinfo.num_components;
+    jpegColorSpace = dcinfo.jpeg_color_space;
 
     printf("image_width    = %i\n", dcinfo.image_width);
     printf("image _height  = %i\n", dcinfo.image_height);
@@ -129,7 +136,6 @@ void JpegImage::loadJpegFile() {
 	jpeg_destroy_decompress(&dcinfo);
 	fclose(handle);
     handle = nullptr;
-
 	loaded = true;
 }
 

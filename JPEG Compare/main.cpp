@@ -11,6 +11,7 @@
 #include <setjmp.h>
 #include "jpeglib.h"
 #include "JpegImage.hpp"
+#include "JpegException.hpp"
 
 #ifdef _WIN64
 FILE _iob[] = { *stdin, *stdout, *stderr };
@@ -32,13 +33,18 @@ int main(int argc, const char * argv[]) {
     const char * jpgOutFile = "/Users/mattvanecek/Documents/XCode Projects/CPP Code Clinic/JPEG Compare/20160530_guitar_0018-new.jpg";
 #endif
 
-    JpegImage decomp(jpgFile);
-    decomp.loadJpegFile();
-    // decomp.writeJpegFile(jpgOutFile);
+    try {
+        JpegImage decomp(jpgFile);
+        decomp.loadJpegFile();
+        // decomp.writeJpegFile(jpgOutFile);
 
-    JpegImage comp(jpgOutFile);
-    comp.setImage(decomp.getImage(), decomp.getHeight(), decomp.getWidth(), decomp.getNumComponents());
-    comp.writeJpegFile();
-
+        JpegImage comp(jpgOutFile);
+        comp.setImage(decomp.getImage(), decomp.getHeight(), decomp.getWidth(), decomp.getNumComponents());
+        comp.writeJpegFile();
+        
+    }
+    catch (JpegException ex) {
+        fprintf(stderr, "Error processing the JPG file:\n%s", ex.what());
+    }
     return 0;
 }

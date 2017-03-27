@@ -13,6 +13,7 @@
 #include "JpegImage.hpp"
 #include "JpegException.hpp"
 
+
 #ifdef _WIN64
 FILE _iob[] = { *stdin, *stdout, *stderr };
 
@@ -28,6 +29,8 @@ int main(int argc, const char * argv[]) {
 #ifdef _WIN64
 	const char * jpgFile = "C:\\Personal\\03196514\\Documents\\GitHub\\JPEG-Compare\\20160530_guitar_0018.jpg";
     const char * jpgOutFile = "C:\\Personal\\03196514\\Documents\\GitHub\\JPEG-Compare\\20160530_guitar_0018-new.jpg";
+
+	char toss[1]; // For the final scanf, to handles VS's console window
 #else
     const char * jpgFile = "/Users/mattvanecek/Documents/XCode Projects/CPP Code Clinic/JPEG Compare/20160530_guitar_0018.jpg";
     const char * jpgOutFile = "/Users/mattvanecek/Documents/XCode Projects/CPP Code Clinic/JPEG Compare/20160530_guitar_0018-new.jpg";
@@ -46,5 +49,11 @@ int main(int argc, const char * argv[]) {
     catch (JpegException ex) {
         fprintf(stderr, "Error processing the JPG file:\n%s", ex.what());
     }
+
+#ifdef _WIN64
+	printf("Press any key to continue...\n");
+	scanf("%c", toss);
+#endif
+
     return 0;
 }

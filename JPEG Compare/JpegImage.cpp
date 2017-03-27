@@ -64,7 +64,10 @@ void JpegImage::initialize() {
     width = 0;
     numComponents = 0;
     row_stride = 0;
-
+	jpg_size = 0;
+	jpegColorSpace = JCS_RGB;
+	handle = nullptr;
+	loaded = false;
 }
 
 void JpegImage::initializeDecompress() {

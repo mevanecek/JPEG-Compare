@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "51E7E5841E80A6B10023FCD2"
-               BuildableName = "JPEG Compare"
-               BlueprintName = "JPEG Compare"
+               BlueprintIdentifier = "511A21011E8A3A8E00E23BFC"
+               BuildableName = "KDTree"
+               BlueprintName = "KDTree"
                ReferencedContainer = "container:JPEG Compare.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "51E7E5841E80A6B10023FCD2"
-            BuildableName = "JPEG Compare"
-            BlueprintName = "JPEG Compare"
+            BlueprintIdentifier = "511A21011E8A3A8E00E23BFC"
+            BuildableName = "KDTree"
+            BlueprintName = "KDTree"
             ReferencedContainer = "container:JPEG Compare.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -55,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "51E7E5841E80A6B10023FCD2"
-            BuildableName = "JPEG Compare"
-            BlueprintName = "JPEG Compare"
+            BlueprintIdentifier = "511A21011E8A3A8E00E23BFC"
+            BuildableName = "KDTree"
+            BlueprintName = "KDTree"
             ReferencedContainer = "container:JPEG Compare.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -74,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "51E7E5841E80A6B10023FCD2"
-            BuildableName = "JPEG Compare"
-            BlueprintName = "JPEG Compare"
+            BlueprintIdentifier = "511A21011E8A3A8E00E23BFC"
+            BuildableName = "KDTree"
+            BlueprintName = "KDTree"
             ReferencedContainer = "container:JPEG Compare.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

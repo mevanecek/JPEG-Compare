@@ -5,10 +5,10 @@
 //  Created by Matt Vanecek on 3/28/17.
 //  Copyright © 2017 Matthew Vanecek. All rights reserved.
 //
-
+#include <iostream>
 #include <stdio.h>
 // A C++ program to demonstrate operations of KD tree
-#include<bits/stdc++.h>
+// #include<bits/stdc++.h>
 using namespace std;
 
 const int k = 2;
@@ -113,10 +113,10 @@ int main()
 
     for (int i=0; i<n; i++)
         root = insert(root, points[i]);
-    
+
     int point1[] = {10, 19};
     (search(root, point1))? cout << "Found\n": cout << "Not Found\n";
-    
+
     int point2[] = {12, 19};
     (search(root, point2))? cout << "Found\n": cout << "Not Found\n";
     

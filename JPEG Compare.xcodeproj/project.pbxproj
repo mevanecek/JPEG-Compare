@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		511A21091E8A3A9A00E23BFC /* KDTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 511A20FC1E8A3A5900E23BFC /* KDTree.cpp */; };
 		51E7E5891E80A6B10023FCD2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51E7E5881E80A6B10023FCD2 /* main.cpp */; };
 		51E7E5921E80E0370023FCD2 /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51E7E5901E80E0370023FCD2 /* libjpeg.a */; };
 		51E7E5931E80E0370023FCD2 /* libturbojpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51E7E5911E80E0370023FCD2 /* libturbojpeg.a */; };
@@ -15,6 +16,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		511A21001E8A3A8E00E23BFC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		51E7E5831E80A6B10023FCD2 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -27,6 +37,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		511A20FC1E8A3A5900E23BFC /* KDTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = KDTree.cpp; path = "../JPEG Compare/KDTree.cpp"; sourceTree = "<group>"; };
+		511A21021E8A3A8E00E23BFC /* KDTree */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KDTree; sourceTree = BUILT_PRODUCTS_DIR; };
 		51E7E5851E80A6B10023FCD2 /* JPEG Compare */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "JPEG Compare"; sourceTree = BUILT_PRODUCTS_DIR; };
 		51E7E5881E80A6B10023FCD2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		51E7E5901E80E0370023FCD2 /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = "../../../../../../../opt/libjpeg-turbo/lib/libjpeg.a"; sourceTree = "<group>"; };
@@ -38,6 +50,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		511A20FF1E8A3A8E00E23BFC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		51E7E5821E80A6B10023FCD2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -50,10 +69,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		511A21031E8A3A8E00E23BFC /* KDTree */ = {
+			isa = PBXGroup;
+			children = (
+				511A20FC1E8A3A5900E23BFC /* KDTree.cpp */,
+			);
+			path = KDTree;
+			sourceTree = "<group>";
+		};
 		51E7E57C1E80A6B10023FCD2 = {
 			isa = PBXGroup;
 			children = (
 				51E7E5871E80A6B10023FCD2 /* JPEG Compare */,
+				511A21031E8A3A8E00E23BFC /* KDTree */,
 				51E7E5861E80A6B10023FCD2 /* Products */,
 				51E7E58F1E80E0370023FCD2 /* Frameworks */,
 			);
@@ -63,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				51E7E5851E80A6B10023FCD2 /* JPEG Compare */,
+				511A21021E8A3A8E00E23BFC /* KDTree */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -91,6 +120,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		511A21011E8A3A8E00E23BFC /* KDTree */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 511A21061E8A3A8E00E23BFC /* Build configuration list for PBXNativeTarget "KDTree" */;
+			buildPhases = (
+				511A20FE1E8A3A8E00E23BFC /* Sources */,
+				511A20FF1E8A3A8E00E23BFC /* Frameworks */,
+				511A21001E8A3A8E00E23BFC /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KDTree;
+			productName = KDTree;
+			productReference = 511A21021E8A3A8E00E23BFC /* KDTree */;
+			productType = "com.apple.product-type.tool";
+		};
 		51E7E5841E80A6B10023FCD2 /* JPEG Compare */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 51E7E58C1E80A6B10023FCD2 /* Build configuration list for PBXNativeTarget "JPEG Compare" */;
@@ -117,6 +163,11 @@
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Matthew Vanecek";
 				TargetAttributes = {
+					511A21011E8A3A8E00E23BFC = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = C5B68YD5UW;
+						ProvisioningStyle = Automatic;
+					};
 					51E7E5841E80A6B10023FCD2 = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
@@ -136,11 +187,20 @@
 			projectRoot = "";
 			targets = (
 				51E7E5841E80A6B10023FCD2 /* JPEG Compare */,
+				511A21011E8A3A8E00E23BFC /* KDTree */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		511A20FE1E8A3A8E00E23BFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				511A21091E8A3A9A00E23BFC /* KDTree.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		51E7E5811E80A6B10023FCD2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -154,6 +214,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		511A21071E8A3A8E00E23BFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = C5B68YD5UW;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		511A21081E8A3A8E00E23BFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = C5B68YD5UW;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		51E7E58A1E80A6B10023FCD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -270,6 +346,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		511A21061E8A3A8E00E23BFC /* Build configuration list for PBXNativeTarget "KDTree" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				511A21071E8A3A8E00E23BFC /* Debug */,
+				511A21081E8A3A8E00E23BFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		51E7E5801E80A6B10023FCD2 /* Build configuration list for PBXProject "JPEG Compare" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -286,6 +370,7 @@
 				51E7E58E1E80A6B10023FCD2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
